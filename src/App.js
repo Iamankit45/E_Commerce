@@ -10,6 +10,7 @@ import SingleProduct from "./SingleProduct";
 import ErrorPage from "./ErrorPage";
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
+import Header from "./Components/Header";
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
     <ThemeProvider   theme={theme}>
     <Router>
     <GlobalStyle/>
+    <Header/>
       <Routes>
         <Route path="/" element={<Home />}/>
 
