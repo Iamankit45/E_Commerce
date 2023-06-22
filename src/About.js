@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import HeroSection from './Components/HeroSection';
+import { useProductContext } from './Context/productcontex';
+
+
+
 const About = () => {
+
+const {myName}= useProductContext();
+
 
     const data={
         name:"Ankit Ecommerce",
     }
-    return <HeroSection myData={data}/>
+    return<>
+    {myName}
+     <HeroSection myData={data}/>
+     </>
 
 };
 
