@@ -4,6 +4,7 @@ import HeroSection from "./Components/HeroSection";
 import Trusted from "./Components/Trusted";
 
 import Services from "./Components/Services";
+import FeatureProduct from "./Components/FeatureProducts";
 
 const Home=()=>{
 
@@ -12,7 +13,7 @@ const Home=()=>{
   }
 return <>
 <HeroSection myData={data}/>
-
+<FeatureProduct/>
 <Services/>
 <Trusted/>
 </>
