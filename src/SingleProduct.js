@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useProductContext } from "./Context/productcontex";
+import PageNavigation from "./Components/PageNavigation";
 
 const API = "https://api.pujakaitem.com/api/products";
 
@@ -30,7 +31,9 @@ const SingleProduct = () => {
     getSingleProduct(`${API}?id=${id}`);
   }, []);
 
-  return <h1>single page</h1>;
+  return (<Wrapper>
+    <PageNavigation title={name}/>
+  </Wrapper>);
 };
 
 const Wrapper = styled.section`
