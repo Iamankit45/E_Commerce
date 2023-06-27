@@ -8,7 +8,10 @@ const initialState = {
     filter_products: [],
     all_products: [],
     grid_view: true,
-    sorting_value: "lowest"
+    sorting_value: "lowest",
+    filters:{
+        text:"",
+    }
 
 };
 
@@ -28,11 +31,7 @@ export const FilterContextProvider = ({ children }) => {
     const setListView = () => {
         return dispatch({ type: "SET_LIST_VIEW" })
     }
-    useEffect(() => {
-        dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
-
-    }, [products])
-
+    
 
     // sorting function
     const sorting = (event) => {
@@ -41,13 +40,26 @@ export const FilterContextProvider = ({ children }) => {
     };
 
 
+    // update the filter values
+  const updateFilterValue = (event) => {
+    let name = event.target.name;
+    let value = event.target.value;
+
+    return dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } });
+  };
+
     useEffect(() => {
-
+        dispatch({ type: "FILTER_PRODUCTS" });
         dispatch({ type: "SORTING_PRODUCTS"})
-    }, [products,state.sorting_value]);
+    }, [products,state.sorting_value,state.filters]);
+
+    useEffect(() => {
+        dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
+
+    }, [products])
 
 
-    return (<FilterContext.Provider value={{ ...state, setGridView, setListView, sorting }}>{children}</FilterContext.Provider>);
+    return (<FilterContext.Provider value={{ ...state, setGridView, setListView, sorting, updateFilterValue, }}>{children}</FilterContext.Provider>);
 };
 
 //custom hook bana rhe h
