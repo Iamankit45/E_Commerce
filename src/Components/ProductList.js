@@ -1,7 +1,7 @@
 
 import { useFilterContext } from "../Context/filterContext";
 import GridView from "./GridView";
-
+import ListView from "./ListView";
 const ProductList = () => {
 
     const { filter_products, grid_view } = useFilterContext();
@@ -11,6 +11,9 @@ const ProductList = () => {
         return <GridView products={filter_products} />;
     }
 
+    if (grid_view === false) {
+        return <ListView products={filter_products} />;
+    }
     return (<div>product</div>)
 }
 
