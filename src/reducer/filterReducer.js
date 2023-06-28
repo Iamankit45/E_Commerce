@@ -19,7 +19,7 @@ const filterReducer = (state, action) => {
         grid_view: false,
       };
 
-      case "GET_SORT_VALUE":
+    case "GET_SORT_VALUE":
       // let userSortValue = document.getElementById("sort");
       // let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
       return {
@@ -60,34 +60,48 @@ const filterReducer = (state, action) => {
       };
 
 
-      case "UPDATE_FILTERS_VALUE":
-        const { name, value } = action.payload;
-  
-        return {
-          ...state,
-          filters: {
-            ...state.filters,
-            [name]: value,
-          },
-        };
+    case "UPDATE_FILTERS_VALUE":
+      const { name, value } = action.payload;
 
-        case "FILTER_PRODUCTS":
-          let { all_products } = state;
-          let tempFilterProduct = [...all_products];
-    
-          const { text, category, company, color } = state.filters;
-    
-          if (text) {
-            tempFilterProduct = tempFilterProduct.filter((curElem) => {
-              return curElem.name.toLowerCase().includes(text);
-            });
-          }
-    
-           
-          return {
-            ...state,
-            filter_products: tempFilterProduct,
-          };
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
+      };
+
+    case "FILTER_PRODUCTS":
+      let { all_products } = state;
+      let tempFilterProduct = [...all_products];
+
+      const { text, category, company, color } = state.filters;
+
+      if (text) {
+        tempFilterProduct = tempFilterProduct.filter((curElem) => {
+          return curElem.name.toLowerCase().includes(text);
+        });
+      }
+      if (category!=="all") {
+        tempFilterProduct = tempFilterProduct.filter(
+          (curElem) => curElem.category === category
+        );
+      }
+      if (company!=="all") {
+        tempFilterProduct = tempFilterProduct.filter(
+          (curElem) => curElem.company.toLowerCase() === company.toLowerCase()
+        );
+      }
+
+      if (color !== "all") {
+        tempFilterProduct = tempFilterProduct.filter((curElem) =>
+          curElem.colors.includes(color)
+        );
+      }
+      return {
+        ...state,
+        filter_products: tempFilterProduct,
+      };
 
     default:
       return state;
